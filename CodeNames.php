@@ -2,66 +2,68 @@
 /******** ODG * 20250315 * Игра в CodeNames
  *        End * DateText * CodeNames.php
  */
+
 include 'ODG.php';
+
+/**
+ * @var PDO $db
+ */
+
 include 'CN_Init.php';
 
-$Player=null;
-foreach($_GET as $key => $value)
-  {
-    switch(mb_strtolower($key))
-      {
-        case 'player':$Player=$value;Break;
-      }
-  }
-if($Player==null)
-  {
-    foreach($_GET as $key => $value)
-      {
-        switch(mb_strtolower($key))
-          {
-            case 'player':$Player=$value;Break;
-          }
-      }
-  }
-$q=0;
-$qBC=0;
-$qBP=0;
-$qRC=0;
-$qRP=0;
-$rState=0;
-$rTeam=0;
-$SavedVoice='';
-if($Player!=null)
-  {
-    $sql='select State,Team,Voice from CN_Players where Name="'.$Player.'"';
-    foreach ($db->query($sql) as $row)
-      {
-        $rState=$row['State'];
-        $rTeam=$row['Team'];
-        $SavedVoice=$row['Voice'];
-      }
-  }
+$Player = null;
+foreach ($_GET as $key => $value) {
+    switch (mb_strtolower($key)) {
+        case 'player':
+            $Player = $value;
+            break;
+    }
+}
+if ($Player == null) {
+    foreach ($_GET as $key => $value) {
+        switch (mb_strtolower($key)) {
+            case 'player':
+                $Player = $value;
+                break;
+        }
+    }
+}
+$q = 0;
+$qBC = 0;
+$qBP = 0;
+$qRC = 0;
+$qRP = 0;
+$rState = 0;
+$rTeam = 0;
+$SavedVoice = '';
+if ($Player != null) {
+    $sql = 'select State,Team,Voice from CN_Players where Name="' . $Player . '"';
+    foreach ($db->query($sql) as $row) {
+        $rState = $row['State'];
+        $rTeam = $row['Team'];
+        $SavedVoice = $row['Voice'];
+    }
+}
 ?>
+
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, m aximum-scale=1.0, minimum-scale=0.1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="Author" content="ODG">
-   <style>
-     #MainTab tr:hover{background:silver}
-   </style>
-	 <script>
-	 <!--
-    var
-      DateText="20250420",
-      Title='ODG\'s CodeNames'
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, m aximum-scale=1.0, minimum-scale=0.1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Author" content="ODG">
+    <style>
+        #MainTab tr:hover {
+            background: silver
+        }
+    </style>
+    <script>
+        const DateText = "20250420";
+        const Title = 'ODG\'s CodeNames';
 
-    document.write('<title>',Title,'</title>')
-
-    //-->
-	 </script>
+        document.write('<title>', Title, '</title>')
+    </script>
 </head>
 <script type="text/javascript" src=../../html/ODG.js></script>
 <script type="text/javascript" src=/VIKS/html/ODG.js></script>
@@ -73,7 +75,7 @@ if($Player!=null)
 <!--
   document.writeln(Title,"'",DateText,". Игра в ",Title," &copy; ODG, 2025",DateText.substring(2,4)=='25'?'':('-'+DateText.substring(2,4)))
 //-->
-</script>
+</script>`
 </font></sup>
 <script type="text/javascript">
 <!--
@@ -731,7 +733,7 @@ else
               {
                 print '<td title="'.$row['Word'].'"'.($CellBgColorStyle==1?'':(' bgcolor="'.$TeamColor[$row['Team']].'"')).'><img src="'.$Images_Dir.'Team_'.$row['Team'].'-0'.$row['Card'].'.jpg"></td>';
               }
-            
+
             if($row['Word_C']==4)
               {
                 print '</tr>';
